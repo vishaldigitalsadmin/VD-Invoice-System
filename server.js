@@ -35,7 +35,8 @@ const allowedUsers = [
     "rameshjrly@gmail.com",
     "vishaldigitalsadmin@gmail.com",
     "sasankmanda8@gmail.com",
-    "scheruvu.30@gmail.com"
+    "scheruvu.30@gmail.com",
+    "jaladi23bcs22@iiitkottayam.ac.in"
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
