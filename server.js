@@ -46,6 +46,8 @@ const allowedUsers = [
     "luckyjaladi1674@gmail.com",
     "rameshjrly@gmail.com",
     "vishaldigitalsadmin@gmail.com"
+    "sasankmanda8@gmail.com"
+    "scheruvu.30@gmail.com"
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -412,7 +414,7 @@ app.post("/submit", async (req, res) => {
 
         from: "onboarding@resend.dev",
 
-        to: "luckyjaladi1674@gmail.com",
+        to: "vishaldigitalsadmin@gmail.com",
 
         subject: `Invoice - ${customerName}`,
 
