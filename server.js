@@ -411,26 +411,27 @@ app.post("/submit", async (req, res) => {
 
     const response = await resend.emails.send({
 
-    from: "onboarding@resend.dev",
+        from: "onboarding@resend.dev",
 
-    to: "YOUR_EMAIL@gmail.com",
+        to: "vishaldigitalsadmin@gmail.com",
 
-    subject: `Invoice - ${customerName}`,
+        subject: `Invoice - ${customerName}`,
 
-    html: mailOptions.html
+        html: mailOptions.html
 
-});
+    });
 
-console.log(response);
+    console.log("RESEND RESPONSE:");
+    console.log(response);
 
-res.redirect("/success");
+    res.redirect("/success");
 
 } catch (error) {
 
+    console.log("RESEND ERROR:");
     console.log(error);
 
     res.send("Error Sending Mail");
 }
-    }
 );
 
