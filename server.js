@@ -13,15 +13,9 @@ app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ===============================
-// STATIC FILES
-// ===============================
 app.use(express.static(path.join(__dirname, "public")));
 
 
-// ===============================
-// SESSION
-// ===============================
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -31,30 +25,21 @@ app.use(
 );
 
 
-// ===============================
-// PASSPORT
-// ===============================
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-// ===============================
-// ALLOWED USERS
-// ===============================
 const allowedUsers = [
     "vishaldigitalseluru@gmail.com",
     "luckyjaladi1674@gmail.com",
     "rameshjrly@gmail.com",
-    "vishaldigitalsadmin@gmail.com"
-    "sasankmanda8@gmail.com"
+    "vishaldigitalsadmin@gmail.com",
+    "sasankmanda8@gmail.com",
     "scheruvu.30@gmail.com"
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// ===============================
-// GOOGLE STRATEGY
-// ===============================
 passport.use(
     new GoogleStrategy(
         {
@@ -77,9 +62,7 @@ passport.use(
 );
 
 
-// ===============================
 // SERIALIZE USER
-// ===============================
 passport.serializeUser((user, done) => {
     done(null, user);
 });
@@ -91,7 +74,7 @@ passport.deserializeUser((user, done) => {
 
 // ===============================
 // ROUTES
-// ===============================
+// =========================
 
 // LOGIN PAGE
 app.get("/", (req, res) => {
@@ -155,9 +138,7 @@ app.get("/success", (req, res) => {
 });
 
 
-// ===============================
 // SERVER
-// ===============================
 const PORT = 3000;
 
 app.listen(PORT, () => {
@@ -412,13 +393,13 @@ app.post("/submit", async (req, res) => {
 
     const response = await resend.emails.send({
 
-        from: "onboarding@resend.dev",
+    from: "onboarding@resend.dev",
 
-        to: "vishaldigitalsadmin@gmail.com",
+    to: "vishaldigitalsadmin@gmail.com",
 
-        subject: `Invoice - ${customerName}`,
+    subject: `Invoice - ${customerName}`,
 
-        html: mailOptions.html
+    html: mailOptions.html
 
     });
 
