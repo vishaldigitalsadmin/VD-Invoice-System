@@ -1,12 +1,12 @@
 require("dotenv").config();
 
+const { Resend } = require("resend");
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const nodemailer = require("nodemailer");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -48,17 +48,7 @@ const allowedUsers = [
     "vishaldigitalsadmin@gmail.com"
 ];
 
-
-const transporter = nodemailer.createTransport({
-
-    service: "gmail",
-
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    }
-
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ===============================
 // GOOGLE STRATEGY
@@ -193,12 +183,6 @@ app.post("/submit", async (req, res) => {
 
 
     const mailOptions = {
-
-    from: process.env.EMAIL_USER,
-
-    to: "vishaldigitalsadmin@gmail.com",
-
-    subject: `Invoice - ${customerName}`,
 
     html: `
 
@@ -425,16 +409,26 @@ app.post("/submit", async (req, res) => {
 
         try {
 
-            await transporter.sendMail(mailOptions);
+    await resend.emails.send({
 
-            res.redirect("/success");
+        from: "onboarding@resend.dev",
 
-        } catch (error) {
+        to: "vishaldigitalsadmin@gmail.com",
 
-            console.log(error);
+        subject: `Invoice - ${customerName}`,
 
-            res.send("Error Sending Mail");
-        }
+        html: mailOptions.html
+
+    });
+
+    res.redirect("/success");
+
+} catch (error) {
+
+    console.log(error);
+
+    res.send("Error Sending Mail");
+}
     }
 );
 
