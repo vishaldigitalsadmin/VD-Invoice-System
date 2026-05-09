@@ -190,10 +190,8 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-app.post(
-    "/submit",
-    upload.array("designImages"),
-
+app.post("/submit", 
+    upload.array("designImages"), 
     async (req, res) => {
 
         const {
