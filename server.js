@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const fs = require("fs");
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
@@ -47,6 +48,10 @@ const allowedUsers = [
     "vishaldigitalsadmin@gmail.com"
 ];
 
+
+if (!fs.existsSync("public/uploads")) {
+    fs.mkdirSync("public/uploads", { recursive: true });
+}
 
 const storage = multer.diskStorage({
 
@@ -211,7 +216,7 @@ app.post(
 
         const attachments = req.files.map(file => ({
             filename: file.filename,
-            path: file.path
+            path: path.join(__dirname, file.path)
         }));
 
 
