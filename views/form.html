@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Form</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="main-container">
+
+        <!-- LEFT SIDE -->
+        <div class="left-section">
+            <img src="/logo.png" alt="Logo" class="logo">
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="right-section">
+
+            <form action="/preview" method="POST" enctype="multipart/form-data">
+
+                <!-- STEP 1 -->
+                <div class="form-step active" id="step1">
+
+                    <h1>Customer Details</h1>
+
+                    <input type="text" name="customerName" placeholder="Customer Name" required>
+
+                    <input type="text" name="mobile" placeholder="Mobile" required>
+
+                    <input type="text" name="whatsapp" placeholder="Whatsapp Number">
+
+                    <select name="sector" required>
+                        <option value="">Sector</option>
+                        <option value="Political">Political</option>
+                        <option value="Retail">Retail</option>
+                        <option value="Marriage">Marriage</option>
+                        <option value="Retairment">Retairment</option>
+                        <option value="Railways">Railways</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <div class="btn-container between-btns">
+
+    <button type="button" onclick="nextStep(2)">
+        NEXT ➜
+    </button>
+
+</div>
+
+                </div>
+
+
+                <!-- STEP 2 -->
+                <div class="form-step" id="step2">
+
+                    <h1>Billing</h1>
+
+                    <select name="item" required>
+                        <option value="">Item</option>
+                        <option value="Flex">Flex</option>
+                        <option value="Photoframe">Photoframe</option>
+                        <option value="Visiting Cards">Visiting Cards</option>
+                    </select>
+
+                    <input type="text" name="size" placeholder="Size">
+
+                    <input type="number" name="quantity" placeholder="Quantity">
+
+                    <input type="number" step="50.00" name="totalBill" placeholder="Total Bill">
+
+                    <input type="number" step="50.00" name="advancePayment" placeholder="Advance Payment (if any)">
+
+                    <div class="btn-container between-btns">
+
+    <button type="button" class="back-btn" onclick="nextStep(1)">
+        ← BACK
+    </button>
+
+    <button type="button" onclick="nextStep(3)">
+        NEXT ➜
+    </button>
+
+</div>
+
+                </div>
+
+
+                <!-- STEP 3 -->
+                <div class="form-step" id="step3">
+
+                    <h1>Additional Info</h1>
+
+                    <textarea
+                        name="description"
+                        rows="6"
+                        placeholder="Description"
+                    ></textarea>
+
+                    <input type="file" name="designImages" multiple>
+
+                    <div class="btn-container between-btns">
+
+    <button type="button" class="back-btn" onclick="nextStep(2)">
+        ← BACK
+    </button>
+
+    <button type="submit">
+        SUBMIT ✓
+    </button>
+
+</div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="/js/script.js"></script>
+
+</body>
+</html>
