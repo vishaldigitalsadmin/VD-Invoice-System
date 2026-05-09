@@ -211,12 +211,48 @@ app.post("/submit",
             billDate
         } = req.body;
 
-        
-        const attachments = req.files.map(file => ({
-            filename: file.filename,
-            path: path.join(__dirname, file.path)
-        }));
 
+        // ==========================================
+// IMAGE ATTACHMENT HANDLING
+// ==========================================
+//
+// req.files contains uploaded images
+// from the preview.html form.
+//
+// On localhost:
+// file.path usually works directly.
+//
+// On deployed Linux servers (Render):
+// relative paths can fail.
+//
+// So we create FULL ABSOLUTE PATHS
+// using __dirname.
+//
+// ALSO:
+// req.files can become undefined
+// if no files are uploaded.
+//
+// Therefore:
+// we safely fallback to [].
+//
+
+const attachments = (req.files || []).map(file => {
+
+    // FULL absolute server path
+    const fullPath = path.resolve(file.path);
+
+    // DEBUG LOG
+    console.log("Attachment Path:", fullPath);
+
+    return {
+
+        // Original uploaded filename
+        filename: file.originalname,
+
+        // Absolute path for Nodemailer
+        path: fullPath
+    };
+});
         const mailOptions = {
 
     from: process.env.EMAIL_USER,
@@ -446,13 +482,32 @@ app.post("/submit",
     </div>
     `,
 
+    // ==========================================
+    // MAIL ATTACHMENTS
+    // ==========================================
+    //
+    // companylogo:
+    // used inside invoice HTML using CID.
+    //
+    // ...attachments:
+    // user uploaded images.
+    //
+
     attachments: [
+
+        // Invoice logo attachment
         {
-            filename: 'logo.png',
-            path: 'public/logo.png',
-            cid: 'companylogo'
-        },
-        ...attachments
+            filename: "logo.png",
+
+            // IMPORTANT:
+        // absolute path required on deployed servers
+            path: path.resolve("public/logo.png"),
+
+            cid: "companylogo"
+       },
+
+    // User uploaded images
+       ...attachments
     ]
 };
 
