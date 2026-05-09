@@ -6,7 +6,6 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const multer = require("multer");
 const nodemailer = require("nodemailer");
 
 const app = express();
@@ -48,24 +47,6 @@ const allowedUsers = [
     "vishaldigitalsadmin@gmail.com"
 ];
 
-
-if (!fs.existsSync("public/uploads")) {
-    fs.mkdirSync("public/uploads", { recursive: true });
-}
-
-const storage = multer.diskStorage({
-
-    destination: (req, file, cb) => {
-        cb(null, "public/uploads");
-    },
-
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
-    }
-
-});
-
-const upload = multer({ storage: storage });
 
 const transporter = nodemailer.createTransport({
 
@@ -190,9 +171,7 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-app.post("/submit", 
-    upload.array("designImages"), 
-    async (req, res) => {
+app.post("/submit", async (req, res) => {
 
         const {
             customerName,
@@ -212,48 +191,7 @@ app.post("/submit",
         } = req.body;
 
 
-        // ==========================================
-// IMAGE ATTACHMENT HANDLING
-// ==========================================
-//
-// req.files contains uploaded images
-// from the preview.html form.
-//
-// On localhost:
-// file.path usually works directly.
-//
-// On deployed Linux servers (Render):
-// relative paths can fail.
-//
-// So we create FULL ABSOLUTE PATHS
-// using __dirname.
-//
-// ALSO:
-// req.files can become undefined
-// if no files are uploaded.
-//
-// Therefore:
-// we safely fallback to [].
-//
-
-const attachments = (req.files || []).map(file => {
-
-    // FULL absolute server path
-    const fullPath = path.resolve(file.path);
-
-    // DEBUG LOG
-    console.log("Attachment Path:", fullPath);
-
-    return {
-
-        // Original uploaded filename
-        filename: file.originalname,
-
-        // Absolute path for Nodemailer
-        path: fullPath
-    };
-});
-        const mailOptions = {
+    const mailOptions = {
 
     from: process.env.EMAIL_USER,
 
@@ -288,7 +226,7 @@ const attachments = (req.files || []).map(file => {
 
                 <div>
                     <img
-                        src="cid:companylogo"
+                        src="https://vd-invoice-system.onrender.com/logo.png"
                         style="
                             width:110px;
                             height:110px;
@@ -492,23 +430,6 @@ const attachments = (req.files || []).map(file => {
     // ...attachments:
     // user uploaded images.
     //
-
-    attachments: [
-
-        // Invoice logo attachment
-        {
-            filename: "logo.png",
-
-            // IMPORTANT:
-        // absolute path required on deployed servers
-            path: path.resolve("public/logo.png"),
-
-            cid: "companylogo"
-       },
-
-    // User uploaded images
-       ...attachments
-    ]
 };
 
         try {
