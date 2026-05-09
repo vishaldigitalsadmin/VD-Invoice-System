@@ -211,12 +211,11 @@ app.post("/submit",
             billDate
         } = req.body;
 
-/*
+        
         const attachments = req.files.map(file => ({
             filename: file.filename,
             path: path.join(__dirname, file.path)
         }));
-*/
 
         const mailOptions = {
 
