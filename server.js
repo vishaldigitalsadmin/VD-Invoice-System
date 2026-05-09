@@ -180,8 +180,7 @@ app.post("/submit", async (req, res) => {
             billNumber,
             billDate
         } = req.body;
-
-
+  
     const mailOptions = {
 
     html: `
@@ -413,7 +412,7 @@ app.post("/submit", async (req, res) => {
 
         from: "onboarding@resend.dev",
 
-        to: "vishaldigitalsadmin@gmail.com",
+        to: "luckyjaladi1674@gmail.com",
 
         subject: `Invoice - ${customerName}`,
 
@@ -432,6 +431,7 @@ app.post("/submit", async (req, res) => {
     console.log(error);
 
     res.send("Error Sending Mail");
+}
 }
 );
 
