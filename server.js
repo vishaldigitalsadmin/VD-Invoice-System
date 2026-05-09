@@ -11,6 +11,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // ===============================
 // STATIC FILES
@@ -420,16 +421,6 @@ app.post("/submit", async (req, res) => {
     </div>
     `,
 
-    // ==========================================
-    // MAIL ATTACHMENTS
-    // ==========================================
-    //
-    // companylogo:
-    // used inside invoice HTML using CID.
-    //
-    // ...attachments:
-    // user uploaded images.
-    //
 };
 
         try {
