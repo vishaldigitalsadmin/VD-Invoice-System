@@ -365,3 +365,64 @@ button:hover{
         height: 180px;
     }
 }
+
+/* =========================
+   MOBILE RESPONSIVE FIX
+========================= */
+
+@media screen and (max-width: 768px){
+
+    .login-page{
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .left-panel,
+    .right-panel,
+    .left-section,
+    .right-section{
+        width: 100% !important;
+        min-width: 100%;
+        padding: 20px;
+    }
+
+    .logo{
+        width: 140px;
+        height: auto;
+        margin: auto;
+        display: block;
+    }
+
+    h1{
+        font-size: 38px !important;
+        line-height: 1.1;
+    }
+
+    p{
+        font-size: 16px !important;
+    }
+
+    form{
+        width: 100%;
+    }
+
+    input,
+    select,
+    textarea,
+    button{
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .main-container{
+        flex-direction: column;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    body{
+        overflow-x: hidden;
+    }
+
+}
