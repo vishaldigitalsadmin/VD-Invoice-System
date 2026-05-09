@@ -392,6 +392,8 @@ app.post("/submit", async (req, res) => {
 
         try {
 
+    console.log("SENDING TO:", "vishaldigitalsadmin@gmail.com");
+
     const response = await resend.emails.send({
 
     from: "onboarding@resend.dev",
