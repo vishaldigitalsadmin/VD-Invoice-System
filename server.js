@@ -409,19 +409,21 @@ app.post("/submit", async (req, res) => {
 
         try {
 
-    await resend.emails.send({
+    const response = await resend.emails.send({
 
-        from: "onboarding@resend.dev",
+    from: "onboarding@resend.dev",
 
-        to: "vishaldigitalsadmin@gmail.com",
+    to: "YOUR_EMAIL@gmail.com",
 
-        subject: `Invoice - ${customerName}`,
+    subject: `Invoice - ${customerName}`,
 
-        html: mailOptions.html
+    html: mailOptions.html
 
-    });
+});
 
-    res.redirect("/success");
+console.log(response);
+
+res.redirect("/success");
 
 } catch (error) {
 
