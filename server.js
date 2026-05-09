@@ -9,6 +9,7 @@ const multer = require("multer");
 const nodemailer = require("nodemailer");
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true }));
 
 // ===============================
