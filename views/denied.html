@@ -1,1 +1,181 @@
-<h1>Access Denied</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Access Denied</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #f5f5f7;
+
+            padding: 20px;
+        }
+
+        .denied-container{
+
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 50px 35px;
+
+            text-align: center;
+
+            box-shadow:
+            0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .icon-circle{
+
+            width: 90px;
+            height: 90px;
+
+            margin: auto;
+            margin-bottom: 25px;
+
+            border-radius: 50%;
+
+            background: #ffe7ec;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 42px;
+
+            color: #e11d48;
+        }
+
+        h1{
+
+            font-size: 42px;
+
+            color: #0f172a;
+
+            margin-bottom: 18px;
+        }
+
+        p{
+
+            font-size: 18px;
+
+            color: #64748b;
+
+            line-height: 1.7;
+
+            margin-bottom: 35px;
+        }
+
+        .back-btn{
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #020617;
+
+            color: white;
+
+            padding: 16px 36px;
+
+            border-radius: 14px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover{
+
+            background: #111827;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================= */
+
+        @media screen and (max-width: 600px){
+
+            .denied-container{
+
+                padding: 40px 25px;
+            }
+
+            .icon-circle{
+
+                width: 75px;
+                height: 75px;
+
+                font-size: 34px;
+            }
+
+            h1{
+
+                font-size: 32px;
+            }
+
+            p{
+
+                font-size: 16px;
+            }
+
+            .back-btn{
+
+                width: 100%;
+
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="denied-container">
+
+        <div class="icon-circle">
+            !
+        </div>
+
+        <h1>Access Denied</h1>
+
+        <p>
+            You don't have permission to access this resource.
+            Please contact your administrator if you believe this is an error.
+        </p>
+
+        <a href="/" class="back-btn">
+            Go Back
+        </a>
+
+    </div>
+
+</body>
+</html>
